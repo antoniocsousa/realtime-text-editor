@@ -118,3 +118,9 @@ li {
     background-color: #d62c2c;
     stroke: #ffffff;
 }
+
+.document {
+    height: 80vh;
+    width: 60vw;
+    resize: none;
+}
