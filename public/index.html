@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./styles.css">
 
     <title>LiveDocs</title>
   </head>
@@ -15,11 +15,11 @@
       <form action="">
         <button type="submit" class="btn">Novo Documento</button>
       </form>
-      <ul class="document-list">
-        <li><a href="document.html?nome=JavaScript" class="document-card">JavaScript</a></li>
-        <li><a href="document.html?nome=teste" class="document-card">teste</a></li>
-      </ul>
+      <ul id="document-list" class="document-list"></ul>
     </main>
+
+    <script src="socket.io/socket.io.js"></script>
+    <script src="./index.js" type="module"></script>
   </body>
 
 </html>

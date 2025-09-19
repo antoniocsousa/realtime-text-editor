@@ -1,41 +1,28 @@
 import io from "./server.js";
-
-const documents = [
-    {
-        nome: "JavaScript",
-        texto: ""
-    },
-    {
-        nome: "teste",
-        texto: ""
-    }
-];
+import { findDocument, updateDocument, getDocuments } from "./services/docsServices.js";
 
 io.on("connection", (socket) => {
-    console.log("um cliente se conectou ID: " + socket.id);
+    socket.on("get_documents", async (returnDocuments) => {
+        const documents = await getDocuments();
 
-    socket.on("documentselect", (nome, updateValue) => {
+        returnDocuments(documents);
+    });
+
+    socket.on("documentselect", async (nome, updateValue) => {
         socket.join(nome);
 
-        const document = findDocument(nome);
+        const document = await findDocument(nome);
 
         if (document) {
             updateValue(document.texto);
         }
     });
 
-    socket.on("texteditor", (text, nome) => {
-        const document = findDocument(nome);
+    socket.on("texteditor", async (text, nome) => {
+        const update = await updateDocument(nome, text);
 
-        if (document) {
-            document.texto = text;
+        if (update.modifiedCount) {
             socket.to(nome).emit("texteditorclient", text);
         }
     });
 });
-
-function findDocument(nome) {
-    const document = documents.find(document => document.nome == nome);
-
-    return document;
-}

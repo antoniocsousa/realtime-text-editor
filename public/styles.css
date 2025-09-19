@@ -122,5 +122,6 @@ li {
 .document {
     height: 80vh;
     width: 60vw;
+    padding: 10px;
     resize: none;
 }
