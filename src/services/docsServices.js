@@ -24,8 +24,22 @@ function getDocuments() {
     return documents;
 }
 
+function createDocument(nome) {
+    const document = Docs.insertOne({nome: nome, texto: ""});
+
+    return document;
+}
+
+function deleteDocument(nome) {
+    const result = Docs.deleteOne({nome: nome});
+
+    return result;
+}
+
 export {
     findDocument,
     updateDocument,
-    getDocuments
+    getDocuments,
+    createDocument,
+    deleteDocument
 }

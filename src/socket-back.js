@@ -1,5 +1,5 @@
 import io from "./server.js";
-import { findDocument, updateDocument, getDocuments } from "./services/docsServices.js";
+import { findDocument, updateDocument, getDocuments, createDocument, deleteDocument } from "./services/docsServices.js";
 
 io.on("connection", (socket) => {
     socket.on("get_documents", async (returnDocuments) => {
@@ -18,11 +18,31 @@ io.on("connection", (socket) => {
         }
     });
 
+    socket.on("createdocument", async (value) => {
+        const existDocument = (await findDocument(value)) !== null;
+
+        if (existDocument) {
+            socket.emit("existdocument", value);
+        } else {
+            const result = await createDocument(value);
+            console.log(result);
+        }
+    });
+
     socket.on("texteditor", async (text, nome) => {
         const update = await updateDocument(nome, text);
 
         if (update.modifiedCount) {
             socket.to(nome).emit("texteditorclient", text);
+        }
+    });
+
+    socket.on("deletedocument", async (nome) => {
+        const result = await deleteDocument(nome);
+        console.log(result);
+
+        if (result.deletedCount) {
+            io.emit("successdelete", nome);
         }
     });
 });

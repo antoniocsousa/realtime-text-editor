@@ -1,4 +1,4 @@
-import { setDocument } from "./index.js";
+import { setDocument, reloadIndex } from "./index.js";
 
 const socket = io();
 
@@ -7,3 +7,15 @@ socket.emit("get_documents", (documents) => {
         setDocument(document.nome);
     });
 });
+
+function createDocument(value) {
+    socket.emit("createdocument", value);
+}
+
+socket.on("successdelete", (nome) => {
+    reloadIndex();
+});
+
+export {
+    createDocument
+}
