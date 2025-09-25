@@ -1,6 +1,6 @@
 # 📝 Realtime Text Editor
 
-Um editor de texto colaborativo em tempo real, onde múltiplos usuários podem editar simultaneamente e ver as mudanças instantaneamente.
+Um editor de texto colaborativo em tempo real, onde múltiplos usuários podem editar simultaneamente e ver as mudanças instantaneamente. Este projeto é do curso "WebSockets: implemente comunicações em tempo real com Socket.IO e MongoDB" da Alra.
 
 ## 🚀 Funcionalidades
 - ✏️ Edição de texto em tempo real entre vários clientes
